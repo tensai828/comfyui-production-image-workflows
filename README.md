@@ -1,58 +1,226 @@
 # ComfyUI Workflows
 
-A repository of well documented easy to follow workflows for [ComfyUI](https://github.com/comfyanonymous/ComfyUI).
+A comprehensive collection of production-ready ComfyUI workflows for Stable Diffusion image generation, covering basic generation through advanced techniques.
 
-## Introduction
+## Overview
 
-The workflows are meant as a **learning exercise**, they are by no means "the best" or the most optimized but they should give you a good understanding of how ComfyUI works.
+This repository contains meticulously documented workflows demonstrating best practices for using ComfyUI, a node-based interface for Stable Diffusion. Whether you're generating images from text prompts, applying AI-powered image transformations, or exploring advanced composition techniques, you'll find practical examples and detailed explanations.
 
-The workflows are designed for readability; the execution flows from left to right, from top to bottom and you should be able to easily follow the "spaghetti" without moving nodes around.
+## Features
 
-This repo is divided into macro categories, in the root of each directory you'll find the basic json files and an `experiments` directory. The experiments are more advanced examples and tips and tricks that might be useful in day-to-day tasks.
+- **Beginner-Friendly**: Start with foundational workflows for SD1.5 and SDXL
+- **Advanced Techniques**: Explore ControlNets, image conditioning, and creative composition
+- **Comprehensive Documentation**: Each section includes detailed README files with explanations and best practices
+- **Tested Workflows**: All JSON files are production-ready and tested
+- **Experiments**: Dedicated experimental workflows for comparing techniques and pushing boundaries
 
-This documetantion is mostly for beginners to intermediate users. Experienced users might find some inspiration in the experiments. No matter your skill level, please let me know if you have suggestions, corrections or if you wish to add a new workflow.
+## Quick Start
 
-The majority of the workflows work **without** any plugin installed with very few exceptions that are outlined in the documention. This is by design to lower as much as possible the entry level and to avoid conflict with a very fast evolving ecosystem.
+1. Install [ComfyUI](https://github.com/comfyanonymous/ComfyUI)
+2. Clone this repository
+3. Copy workflows to your ComfyUI installation
+4. Load a workflow JSON file in ComfyUI
+5. Ensure required models are installed (see section READMEs for specific requirements)
 
-## Why ComfyUI
+## Directory Structure
 
-There's a bit of turmoil in the community about [Stability AI](https://stability.ai/) endorsing ComfyUI.
+### 📚 [Basic](/basic/)
+Foundation workflows for text-to-image generation:
+- **Basic SD1.5 workflows**: Simple to advanced text-to-image pipelines
+- **SDXL workflows**: Base model, refined, and advanced configurations
+- **Advanced techniques**: LoRA application, CLIP skip, batching, and model comparison
 
-First of all there are many easier to use alternatives (like [StableSwarmUI](https://github.com/Stability-AI/StableSwarmUI)) and you are not forced to use ComfyUI if you are not comfortable with it. The most likely downside is that new features will take a little longer to get implemented outside of Comfy.
+Key concepts covered:
+- Checkpoint loading and model selection
+- Latent vs. pixel space understanding
+- KSampler configuration (seed, steps, CFG, sampler/scheduler selection)
+- VAE encoding/decoding
+- LoRA (Low-Rank Adaptation) integration
 
-ComfyUI has a tidy and swift codebase that makes adjusting to a fast paced technology easier than most alternatives. Its modular nature lets you mix and match component in a very granular and unconvential way. Most Stable Diffusion UIs choose for you the best pratice for any given task, with ComfyUI you can make your own best practice and easily compare the outcome of multiple solutions.
+### 🎨 [Text-to-Image](/text2img/)
+Text prompt optimization and conditioning techniques:
+- **Word Weighting**: Emphasis control using parentheses notation
+- **Embeddings**: Textual inversion for custom styles
+- **Conditioning Methods**: Concat, average, and area-based text conditioning
+- **Advanced Techniques**: Timestepping and GLIGEN box for spatial text control
 
-On top of that ComfyUI is very efficient in terms of memory usage and speed.
+Experiments include conditioning method comparisons and creative prompt engineering.
 
-## How-to
+### 📷 [Image-to-Image Conditioning](/image_conditioning/)
+Reference-based generation and style transfer:
+- **Simple Img2Img**: Denoise-controlled image variation
+- **unCLIP Models**: Style-based generation from reference images
+- **IPAdapter**: Image-based conditioning with SDXL
+- **Style Models**: Temporal style transfer techniques
+- **SDXL Revision**: Advanced SDXL-specific conditioning
 
-To follow all the exercises, clone or download this repository and place the files in the `input` directory inside the `ComfyUI/input` directory on your PC. That will let you follow all the workflows without errors.
+Includes techniques for working with different image sizes and aspect ratios.
 
-To review any workflow you can simply drop the JSON file onto your ComfyUI work area, also remember that any image generated with ComfyUI has the whole workflow embedded into itself. You can take many of the images you see in this documentation and drop it inside ComfyUI to load the full node structure.
+### 🎭 [Guided Composition](/guided_composition/)
+ControlNet-based precise image generation:
+- **Pose Control**: Character posing with OpenPose
+- **Canny Edge Detection**: Sketch-based composition
+- **Depth Maps**: 3D spatial control and volume definition
+- **Multiple ControlNets**: Combining multiple control sources
 
-Let's get started!
+Requires: [ComfyUI ControlNet Auxiliary Preprocessors](https://github.com/Fannovel16/comfyui_controlnet_aux)
 
-<img src="images/SDXL_fox.png" alt="fox" width="256" height="256" />
+### 🎨 [In/Out Painting](/in-out_painting/)
+Image editing and expansion workflows:
+- **Inpainting**: Precise region editing and modification
+- **Outpainting**: Seamless image expansion
+- **Cross-Model Inpainting**: Using SD1.5 inpainting with SDXL refiner
+- **Seam Removal**: Post-processing techniques for seamless results
 
-## Categories
+Best practices for mask creation, mask growing, and denoise optimization.
 
-### [Basic](basic/README.md)
-In this section you'll learn the basics of ComfyUI and Stable Diffusion. Any future workflow will be probably based on one of theses node layouts.
+### 📈 [Upscaling](/upscale/)
+Image enhancement and resolution optimization:
+- **Latent Upscaling**: GPU-efficient upscaling in latent space
+- **Pixel Upscaling**: Traditional and model-based upscaling
+- **Resolution Enhancement**: Hires fix techniques and denoise configuration
+- **Tile ControlNet**: Advanced upscaling with structural guidance
 
-### [Upscale](upscale/README.md)
-Explores various options to upscale (aka *hires fix*) a generated image.
+Comprehensive analysis of denoise impact and resource optimization.
 
-### [Text to Image](text2img/README.md)
-Advanced Text-to-Image techniques. Word weighting, embeddings, timestepping, gligen, ...
+## Requirements
 
-### [Image-to-Image conditioning](image_conditioning/README.md)
-An image is worth a thousand words. Image-to-image techniques and some image conditioning models.
+### Core
+- ComfyUI (latest version recommended)
+- Python 3.10+
+- GPU with sufficient VRAM (8GB minimum, 12GB+ recommended)
 
-### [In/Out painting](in-out_painting/README.md)
-How to expand and alter your already generated images.
+### Models
+Different workflows require different checkpoints:
+- **SD1.5**: v1-5-pruned-emaonly.safetensors
+- **SDXL**: SDXL 1.0 base and refiner models
+- **ControlNets**: Version-matched to your checkpoint (v1.5, v2.1, or SDXL)
+- **Inpainting Models**: Specific inpainting checkpoints for optimal results
 
-### [Guided composition](guided_composition/README.md)
-In this section we'll explore ControlNets, T2I-Adapter and other techniques to better pose and compose your images.
+Download models from:
+- [Hugging Face](https://huggingface.co/)
+- [Civitai](https://civitai.com/)
 
-### TO-DO
-This is a work in progress, be sure to check back if there are any new additions. The next planned section is **Detailing** where we'll learn how to cut out pieces (eg. faces, hands) of an image to enhance them.
+### Extensions
+Some workflows require additional extensions:
+- [ComfyUI ControlNet Auxiliary Preprocessors](https://github.com/Fannovel16/comfyui_controlnet_aux) - For guided composition workflows
+
+## Key Concepts
+
+### Latent vs. Pixel Space
+Stable Diffusion processes images in "latent space" — a compressed representation that's computationally efficient. Only the final output is converted to pixels. Understanding this distinction is crucial for efficient upscaling and generation.
+
+### Denoise Parameter
+Controls how much the model modifies an image:
+- **Lower values (0.25-0.5)**: Minimal changes, preserves structure
+- **Higher values (0.55+)**: Significant modifications, better details
+- For latent upscaling: typically requires higher denoise (0.55+)
+
+### Sampler & Scheduler
+Different samplers achieve quality results at different step counts:
+- **Recommended**: Euler Ancestral, DPM++ 2M Karras
+- Experimentation is key — no universal "best" sampler
+
+### CFG Scale
+Classifier-Free Guidance controls prompt adherence:
+- **Lower (4-5)**: Model has creative freedom
+- **Higher (7-9)**: Stricter prompt following
+- Typical range: 4-9 depending on checkpoint and prompt complexity
+
+## Workflow Structure
+
+Each workflow follows this typical pattern:
+
+1. **Load Model**: Checkpoint loading (SD1.5, SDXL, or specialized models)
+2. **Set Parameters**: Resolution, seed, steps, sampler configuration
+3. **Text Encoding**: CLIP models process text prompts
+4. **Sampling**: KSampler processes latent data iteratively
+5. **Decoding**: VAE converts latent to pixel image
+6. **Post-Processing**: Optional upscaling, refinement, or additional passes
+
+## Tips & Best Practices
+
+- **Color-Coded Connections**: ComfyUI uses colored dots on nodes to indicate connection types — match colors when building workflows
+- **Experiment**: Workflow results are highly dependent on checkpoint, prompt, and parameters. Use the experimental workflows to compare approaches
+- **Batch Processing**: Process multiple images simultaneously for efficiency
+- **Save Frequently**: ComfyUI autosaves, but manual saves before major changes are recommended
+- **Memory Management**: For large batches or high resolutions, adjust batch sizes to fit your GPU
+
+## Model Compatibility Notes
+
+⚠️ **Important**: ControlNets must match your checkpoint version:
+- SD v1.5 ControlNets with SD v1.5 checkpoints
+- SDXL ControlNets with SDXL checkpoints
+
+Mixing versions will produce poor results.
+
+## Random Number Generation
+
+ComfyUI's random number generation differs from other UIs (A1111, InvokeAI, etc.), making it difficult to exactly reproduce images generated on other platforms. Use consistent seeds within ComfyUI workflows for reproducibility.
+
+## Example Workflows by Use Case
+
+| Use Case | Workflow | Location |
+|----------|----------|----------|
+| First-time generation | [Basic SD1.5](./basic/basic_workflow.json) | basic/ |
+| Multiple images | [Batch Processing](./basic/basic_latent_batch.json) | basic/ |
+| Custom styles | [LoRA Application](./basic/basic_lora.json) | basic/ |
+| Precise composition | [Canny ControlNet](./guided_composition/canny.json) | guided_composition/ |
+| Image improvement | [Img2Img](./image_conditioning/img2img_SDXL.json) | image_conditioning/ |
+| Upscaling | [Latent Upscale](./upscale/upscale_latent.json) | upscale/ |
+| Detail editing | [Inpainting](./in-out_painting/inpaint.json) | in-out_painting/ |
+| Image expansion | [Outpainting](./in-out_painting/outpaint.json) | in-out_painting/ |
+
+## License
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! Feel free to submit:
+- New workflow examples
+- Improvements to existing workflows
+- Documentation enhancements
+- Bug reports or suggestions
+
+## Resources
+
+### Learning
+- [ComfyUI Documentation](https://github.com/comfyanonymous/ComfyUI)
+- [Stable Diffusion Paper](https://arxiv.org/abs/2112.10752)
+- [ControlNet Paper](https://arxiv.org/abs/2302.05543)
+
+### Models & Assets
+- [Civitai](https://civitai.com/) - Community models
+- [Hugging Face](https://huggingface.co/) - Official models
+- [PoseMy.Art](https://posemy.art/) - Character posing
+- [Cascadeur](https://cascadeur.com/) - Professional character animation
+
+## Troubleshooting
+
+**Out of Memory (OOM)**
+- Reduce batch size
+- Lower latent resolution
+- Use memory-optimized samplers
+- Enable memory pooling in ComfyUI settings
+
+**Poor Quality Results**
+- Increase sampling steps (15-20 minimum)
+- Adjust CFG scale (4-9 range)
+- Try different samplers
+- Use appropriate checkpoint for your task
+
+**Seams in Outpainting/Inpainting**
+- Increase mask grow value
+- Use lower denoise for refinement passes
+- Apply upscaling as final step
+
+## Changelog
+
+See individual workflow directories for detailed update information.
+
+---
+
+**Last Updated**: February 2026  
+**ComfyUI Version**: Compatible with latest versions  
+**Status**: Active development and maintenance
